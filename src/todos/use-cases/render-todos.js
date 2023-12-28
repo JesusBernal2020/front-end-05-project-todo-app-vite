@@ -1,5 +1,6 @@
 import { creatTodoHTML } from './';
 
+let element;
 /**
  * Funcion para renderisar los Tdos
  * @param {String} elementId identificardor del elemento a renderizar
@@ -7,7 +8,11 @@ import { creatTodoHTML } from './';
  */
 export const renderTodos = (elementId, todos = []) => {
   //referencia
-  const element = document.querySelector(elementId);
+  if (!element) element = document.querySelector(elementId);
+
+  if (!element) throw new Error(`Element ${elementId} not found`);
+
+  element.innerHTML = '';
 
   todos.forEach((todo) => {
     element.append(creatTodoHTML(todo));
